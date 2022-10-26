@@ -145,10 +145,15 @@ local function do_authentication(conf)
 
   -- validate timestamp exists
   local timestamp = kong_request.get_query_arg(PARAM_TIMESTAMP)
+  
+  if not timestamp then
+    return false, { status = 401, message = "Unauthorized, timestamp is missing" }
+  end
+
   local nonce = kong_request.get_query_arg(PARAM_NONCE)
   -- If both headers are missing, return 401
-  if not (timestamp or nonce) then
-    return false, { status = 401, message = "Unauthorized, timestamp or nonce is missing" }
+  if not nonce then
+    return false, { status = 401, message = "Unauthorized, nonce is missing" }
   end
 
   -- validate clock skew
@@ -211,6 +216,10 @@ function _M.execute(conf)
   --   -- hence we're in a logical OR between auth methods and we're already done.
   --   -- 如果允许匿名访问，并且当前可以获取，详情查看：https://docs.konghq.com/gateway/latest/plugin-development/pdk/kong.client/#kongclientget_credential
   --   return
+  -- end
+  -- local point = kong_request.get_query_arg('point')
+  -- if not point then
+  --   kong.response.error(400, 'kong_request.get_query_arg - point')
   -- end
 
   local ok, err = do_authentication(conf)
