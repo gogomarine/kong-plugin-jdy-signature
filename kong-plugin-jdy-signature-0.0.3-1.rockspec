@@ -1,6 +1,6 @@
 local plugin_name = "jdy-signature"
 local package_name = "kong-plugin-" .. plugin_name
-local package_version = "0.0.2"
+local package_version = "0.0.3"
 local rockspec_revision = "1"
 
 local github_account_name = "gogomarine"
