@@ -15,7 +15,7 @@ local access = require "kong.plugins.jdy-signature.access"
 
 local plugin = {
   PRIORITY = 1000, -- set the plugin priority, which determines plugin execution order
-  VERSION = "0.0.3", -- version in X.Y.Z format. Check hybrid-mode compatibility requirements.
+  VERSION = "0.0.4", -- version in X.Y.Z format. Check hybrid-mode compatibility requirements.
 }
 
 
